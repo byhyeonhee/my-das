@@ -1,7 +1,7 @@
 const clearBtn = d3.select('#clearBtn');
 const getUserBtn = d3.select('#getUserBtn');
 const getUserIdBtn = d3.select('#getUserIdBtn');
-const getUserCountBtn = d3.select('#getUserCountBtn');
+const getUserLimitBtn = d3.select('#getUserLimitBtn');
 const getUserFieldBtn = d3.select('#getUserFieldBtn');
 const getUserQuery = d3.select('#getUserQuery');
 const getTopUserBtn = d3.select('#getTopUserBtn');
@@ -53,13 +53,13 @@ getUserIdBtn.on('click', () => {
 })
 
 
-getUserCountBtn.on('click', () => {
-    const count = d3.select('#count').property('value')
+getUserLimitBtn.on('click', () => {
+    const limit = d3.select('#limit').property('value')
     const options = {
         method : 'GET'
     }
 
-    fetch(`/api/v1.0/users?count=${count}`, options)
+    fetch(`/api/v1.0/users?limit=${limit}`, options)
     .then(response => {
         return response.json()
     })

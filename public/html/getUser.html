@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
-    <body>
+    <body style="font-size:12px">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -33,13 +33,14 @@
             <button id="getUserQuery">GET</button>
         </div>
         <div>
-            GET /api/v1.0/users?count=<input id="count"></input>
-            <button id="getUserCountBtn">GET</button>
+            GET /api/v1.0/users?limit=<input id="limit"></input>
+            <button id="getUserLimitBtn">GET</button>
         </div>
         <div>
             GET /api/v1.0/users?fields=<input id="fields"></input>
             <button id="getUserFieldBtn">GET</button>
         </div>
+       
         <p>* Predefined views</p>
         <div>
             GET /api/v1.0/users/view/topUser
@@ -49,6 +50,35 @@
             GET /api/v1.0/users/view/invalidUser
             <button id="getInvalidUserBtn">GET</button>
         </div>
+
+        <p>* Apply predefined functions</p>
+        <div>
+            GET /api/v1.0/users/function/count
+            <button id="getFunctionCount">GET</button>
+        </div>
+        <div>
+            GET /api/v1.0/users/function/sort?colname=
+            <input id="sortKey"></input>
+            <button id="getFunctionSort">GET</button>
+        </div>      
+        <div>
+            GET /api/v1.0/users/function/sum?colname=
+            <input id="sumKey"></input>
+            <button id="getFunctionSum">GET</button>
+        </div>      
+        <div>
+            GET /api/v1.0/users/function/min?colname=
+            <input id="minKey"></input>
+            <button id="getFunctionMin">GET</button>
+        </div>   
+        <div>
+            GET /api/v1.0/users/function/max?colname=
+            <input id="maxKey"></input>
+            <button id="getFunctionMax">GET</button>
+        </div>  
+
+
+
 
         <p>* Normal insert</p>
         <div>

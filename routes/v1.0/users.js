@@ -37,6 +37,7 @@ router.use('/view/:viewName', (req, res, next) => {
   }
 }) 
 
+/* insert into table */
 router.post('/', async(req,res,next) => {
   try{
     const columns = Object.keys(req.body).join(',');
@@ -51,6 +52,7 @@ router.post('/', async(req,res,next) => {
   }
 })
 
+/* delete from table */
 router.delete('/:userid', async(req,res,next) => {
   try {
     const userid = req.params.userid;
@@ -65,7 +67,7 @@ router.delete('/:userid', async(req,res,next) => {
   }
 })
 
-
+/* update table */
 router.patch('/:userid', async(req,res,next) => {
   try {
     const columnClauses = Object.keys(req.body).map(column => {
@@ -84,6 +86,5 @@ router.patch('/:userid', async(req,res,next) => {
     res.send([{msg:'fail'}]);
   }
 })
-
 
 module.exports = router; 

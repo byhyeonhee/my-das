@@ -3,15 +3,31 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const IBMDB = require('./lib/ibmdb');
 
+const IBMDB = require('./lib/ibmdb');
+const appconfig = require('./appconfig.json');
+
+// db config
 const dbConfig = require('./dbconfig.json');
 const dbOptions = dbConfig.DB2['DASDEV'];
 global.dasdb = new IBMDB(dbOptions);
 
+
+// setup logging
+const options = {
+  notification : appconfig.notification,
+  logLevel : appconfig.logLevel,
+  logFile : appconfig.logFile
+}
+
+global.logger = require('./lib/logger')(options);
+
 const indexRouter = require('./routes/index');
 
 const app = express();
+// express security guide
+const helmet = require('helmet');
+app.use(helmet());
 
 app.use(logger('dev'));
 app.use(express.json());

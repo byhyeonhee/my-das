@@ -1,7 +1,7 @@
 module.exports = function(req, res, next) {
     const fields = req.query.fields || '*';
     const whereClause = req.query.q ? `where ${mkWhereClause(req.query.q)}` : '';
-    const limitResult = req.query.count ? `FETCH FIRST ${req.query.count} ROWS ONLY` : '';
+    const limitResult = req.query.limit ? `FETCH FIRST ${req.query.limit} ROWS ONLY` : '';
     const additionalSQL = `${whereClause} ${limitResult}`
 
     req.parsed = {
