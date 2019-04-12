@@ -6,11 +6,10 @@ const logger = require('morgan');
 const IBMDB = require('./lib/ibmdb');
 
 const dbConfig = require('./dbconfig.json');
-const DASDEV_OPTIONS = dbConfig.DB2['DASDEV'];
-global.dasdb = new IBMDB(DASDEV_OPTIONS);
+const dbOptions = dbConfig.DB2['DASDEV'];
+global.dasdb = new IBMDB(dbOptions);
 
 const indexRouter = require('./routes/index');
-const apiRouter = require('./routes/version');
 
 const app = express();
 
@@ -24,8 +23,6 @@ app.use('/', indexRouter);
 app.use('/api/:version', (req, res, next) => {
   require(`./routes/${req.params.version}`)(req, res, next);
 });
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
