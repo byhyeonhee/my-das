@@ -28,7 +28,7 @@ router.get('/:userid', parseQueryString, async (req, res, next) => {
   }
 })
 
-/* predefined view */
+/* predefined views */
 router.use('/view/:viewName', (req, res, next) => {
   try{
     require(`./view_${req.params.viewName}`)(req, res, next);

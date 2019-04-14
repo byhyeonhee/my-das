@@ -22,8 +22,6 @@ const options = {
 
 global.logger = require('./lib/logger')(options);
 
-const indexRouter = require('./routes/index');
-
 const app = express();
 // express security guide
 const helmet = require('helmet');
@@ -35,7 +33,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/api/:version', (req, res, next) => {
   require(`./routes/${req.params.version}`)(req, res, next);
 });
