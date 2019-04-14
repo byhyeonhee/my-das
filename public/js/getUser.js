@@ -12,157 +12,86 @@ const PatchUserBtn = d3.select('#PatchUserBtn');
 
 const target = d3.select('#resultDiv');
 
-function printResult(db2Result, node) {
+function printResult(results, node) {
     const ul = node.append('ul').style('font-size','10px');
-    console.log(db2Result)
-    db2Result.map(result => {
-        ul.append('li').text(JSON.stringify(result));
+    console.log(results)
+    if(results.success) results.body.map(result => ul.append('li').text(JSON.stringify(result)));
+    if(!results.success) {
+        const err = results.err
+        const result = (typeof(err) === 'object') ? JSON.stringify(err) : err;
+        ul.append('li').text(result);
+    }
+}
+
+function request(url, options) {
+    fetch(url, options)
+    .then(response => {
+        return response.json()
+    })
+    .then(body => {
+        target.selectAll('*').remove();
+        printResult(body, target)
     })
 }
 
 clearBtn.on('click', () => target.selectAll('*').remove() )
 
 getUserBtn.on('click', () => {
-    const options = {
-        method : 'GET'
-    }
-    fetch('/api/v1.0/users', options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request('/api/v1.0/users', options)
 })
 
 getUserIdBtn.on('click', () => {
     const userID = d3.select('#userid').property('value')
-    const options = {
-        method : 'GET'
-    }
-
-    fetch(`/api/v1.0/users/${userID}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users/${userID}`, options)
 })
 
 
 getUserLimitBtn.on('click', () => {
     const limit = d3.select('#limit').property('value')
-    const options = {
-        method : 'GET'
-    }
-
-    fetch(`/api/v1.0/users?limit=${limit}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users?limit=${limit}`, options)
 })
 
 getUserFieldBtn.on('click', () => {
     const fields = d3.select('#fields').property('value')
-    const options = {
-        method : 'GET'
-    }
-    fetch(`/api/v1.0/users?fields=${fields}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users?fields=${fields}`, options)
 })
 
 getUserQuery.on('click', () => {
     const query = d3.select('#query').property('value')
-    const options = {
-        method : 'GET'
-    }
-
-    fetch(`/api/v1.0/users?q=${query}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users?q=${query}`, options)
 })
 
 getTopUserBtn.on('click', () => {
-    const options = {
-        method : 'GET'
-    }
-
-    fetch(`/api/v1.0/users/view/topUser`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users/view/topUser`, options)
 })
 
 getInvalidUserBtn.on('click', () => {
-    const options = {
-        method : 'GET'
-    }
-
-    fetch(`/api/v1.0/users/view/invalidUser`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })    
+    const options = { method : 'GET' }
+    request(`/api/v1.0/users/view/invalidUser`, options) 
 })
 
 POSTUserBtn.on('click', () => {
     const body = d3.select('#postBody').property('value');
-    console.log(typeof(body));
     const options = {
         method : 'POST',  
         headers : {'Content-Type': 'application/json'},
         body : body
     }
 
-    fetch(`/api/v1.0/users`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })       
+    request(`/api/v1.0/users`, options);    
 })
 
 DeleteUserBtn.on('click', () => {
     const userID = d3.select('#deleteID').property('value')
-    const options = {
-        method : 'DELETE'
-    }
+    const options = { method : 'DELETE' }
 
-    fetch(`/api/v1.0/users/${userID}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })    
+    request(`/api/v1.0/users/${userID}`, options)
 })
 
 PatchUserBtn.on('click', () => {
@@ -174,12 +103,5 @@ PatchUserBtn.on('click', () => {
         body : body
     }
 
-    fetch(`/api/v1.0/users/${userID}`, options)
-    .then(response => {
-        return response.json()
-    })
-    .then(body => {
-        target.selectAll('*').remove();
-        printResult(body, target)
-    })     
+    request(`/api/v1.0/users/${userID}`, options);  
 })

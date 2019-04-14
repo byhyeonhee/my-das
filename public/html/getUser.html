@@ -18,30 +18,30 @@
         <div>
             <button id="clearBtn">CLEAR</button>
         </div>
-        <p>* Normal select (collection and item with id)</p>
+        <p>* Select (collection and item with id)</p>
         <div>
             GET /api/v1.0/users
             <button id="getUserBtn">GET</button>
         </div>
         <div>
-            GET /api/v1.0/users/<input id="userid"></input>
+            GET /api/v1.0/users/<input id="userid" value="S9A4268"></input>
             <button id="getUserIdBtn">GET</button>
         </div>
-        <p>* Use query string to limit selected data</p>
+        <p>* Select (Use query string to limit selected data)</p>
         <div>
-            GET /api/v1.0/users?q=<input id="query"></input>
+            GET /api/v1.0/users?q=<input id="query" value="DEPT_CD -eq 'DA0203' and REG_DT -gt '20110101000000'"></input>
             <button id="getUserQuery">GET</button>
         </div>
         <div>
-            GET /api/v1.0/users?limit=<input id="limit"></input>
+            GET /api/v1.0/users?limit=<input id="limit" value=10></input>
             <button id="getUserLimitBtn">GET</button>
         </div>
         <div>
-            GET /api/v1.0/users?fields=<input id="fields"></input>
+            GET /api/v1.0/users?fields=<input id="fields" value="SBS_USER_ID, user_nm, user_num"></input>
             <button id="getUserFieldBtn">GET</button>
         </div>
        
-        <p>* Predefined views</p>
+        <p>* Select (Predefined views)</p>
         <div>
             GET /api/v1.0/users/view/topUser
             <button id="getTopUserBtn">GET</button>
@@ -51,7 +51,7 @@
             <button id="getInvalidUserBtn">GET</button>
         </div>
 
-        <p>* Apply predefined functions</p>
+        <p>* Select (Predefined functions)</p>
         <div>
             GET /api/v1.0/users/function/count
             <button id="getFunctionCount">GET</button>
@@ -80,21 +80,21 @@
 
 
 
-        <p>* Normal insert</p>
+        <p>* Insert</p>
         <div>
             POST /api/v1.0/users
-            <input id="postBody" placeholder="{}"></input>
+            <input id="postBody"></input>
             <button id="POSTUserBtn">POST</button>
         </div>
 
-        <p>* Normal delete</p>
+        <p>* Delete</p>
         <div>
             DELETE /api/v1.0/users/
             <input id="deleteID"></input>
             <button id="DeleteUserBtn">DELETE</button>
         </div>
 
-        <p>* Normal Update</p>
+        <p>* Update</p>
         <div>
             PATCH /api/v1.0/users/
             <input id="patchID"></input>
