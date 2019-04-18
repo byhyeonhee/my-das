@@ -8,7 +8,7 @@ router.get('/', parseQueryString, async (req, res, next) => {
     const additionalWhereClause = req.parsed.whereClause ? `where ${req.parsed.whereClause}` : '';
     const limitClause = req.parsed.limitResult || '';;
     const sql = `select ${req.parsed.fields} from das.user_info_tbl ${additionalWhereClause} ${limitClause}`;
-    const result = await dasdb.query(sql,[]); 
+    const result = await dasdb.query(sql,[]);
     res.sendResult(result);
   } catch(err) {
     global.logger.error(err);
@@ -30,7 +30,7 @@ router.get('/:userid', parseQueryString, async (req, res, next) => {
     global.logger.error(err);
     res.sendError(err);
   }
-})
+});
 
 /* predefined views */
 router.use('/view/:viewName', (req, res, next) => {
